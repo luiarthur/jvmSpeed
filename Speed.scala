@@ -1,3 +1,12 @@
+/* Speed test for updating only some fileds in a class
+ * Study:
+ *   - Create a class with two fields (two matrices: one large, one small)
+ *     - check time taken to copy the object while updating only the large matrix 
+ *     - check time taken to copy the object while updating only the small matrix
+ *   - Conclusions:
+ *     - if you only update the small matrix, even though the other matrix is large, there will be no penalty.
+ */
+
 def timer[R](block: => R) = {
   val t0 = System.nanoTime()
   val result = block
