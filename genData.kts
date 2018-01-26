@@ -17,11 +17,11 @@ fun runif():Double {
   //return 1.0
 }
 
-fun <T>writeFile(x:T, dest:String) {
+fun <T:Serializable>writeFile(x:T, dest:String) {
   val fout = FileOutputStream(dest)
   val oos = ObjectOutputStream(fout)
-  //oos.writeObject(x)
-  oos.use{ it -> it.writeObject(x) }
+  oos.writeObject(x)
+  //oos.use{ it -> it.writeObject(x) }
   oos.close()
 }
 
@@ -42,6 +42,6 @@ println("writing")
 writeFile(y, "data/dat_kotlin.ser")
 
 // to run as script: 
-// kotlinc -script genData.kts 50000
+// kotlinc -script genData.kts
 
 
