@@ -22,6 +22,18 @@ def matMap(m: Matrix, f:Double => Double) = {
   m.map( row => row.map(f) )
 }
 
+def matMapMutable(m: Matrix, f:Double => Double) {
+  val c = m(0).indices
+  lazy val r = m.indices
+  r.foreach{ i => 
+    c.foreach{ j => 
+      val xij = m(i)(j)
+      m(i)(j) = f( xij )
+    }
+  }
+}
+
+
 def updateX(s:State) = {
   val newX = matMap(s.x, {d:Double => d + 1})
   s.copy(x=newX)
@@ -33,11 +45,23 @@ def updateY(s:State) = {
   s.copy(y=newY)
 }
 
+
+def updateXMutable(s:State) {
+  matMapMutable(s.x, {d:Double => d + 1})
+}
+
+def updateYMutable(s:State) {
+  matMapMutable(s.y, {d:Double => d + 1})
+}
+
+
 val x = Array.tabulate(50000)(n => Array.tabulate(32)(j => 0.0))
 val y = Array.tabulate(5)(n => Array.tabulate(3)(j => 0.0))
 
-val t = State(x,y)
+val t = State(x.clone,y.clone)
 
 val t1 = timer{ updateX(t) }
 val t2 = timer{ updateY(t) }
 
+timer{ updateXMutable(t) }
+timer{ updateYMutable(t) }
