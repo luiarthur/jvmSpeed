@@ -14,7 +14,6 @@ object GenData {
   }
 
 
-  //def readFile[T](path:String):T = {
   def readFile[T](path:String):T = {
     val fin = new FileInputStream(path)
     val ois = new ObjectInputStream(fin)
