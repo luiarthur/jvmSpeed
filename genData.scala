@@ -38,17 +38,14 @@ object GenData {
   }
 
   def main(args:Array[String]) {
-    //val n = args.head.toInt
-    //val x = List.fill(32)(1.23391873987)
-    //val y = List.fill(n)(x)
+    //val N = args.head.toInt
     val N = 50000
     val J = 32
     val M = 10
-    //lazy val y = Array.tabulate(N){n => 
-    //  Array.tabulate(J)(j => {
-    //    scala.util.Random.nextDouble
-    //  })
-    //}
+
+    //val N = 20000
+    //val J = 200
+    //val M = 3
 
     lazy val z = timer {
       Array.tabulate(M){m => 
