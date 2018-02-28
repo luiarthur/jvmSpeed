@@ -47,7 +47,7 @@ object GenData {
     //val J = 200
     //val M = 3
 
-    lazy val z = timer {
+    val z = timer {
       Array.tabulate(M){m => 
         Array.tabulate(N){n => 
           Array.tabulate(J)(j => {
@@ -57,6 +57,10 @@ object GenData {
       }
     }
     timer{ writeFile(z, path) }
+
+    // val x = Array.tabulate(N){ n => scala.util.Random.nextDouble }
+    // timer{ writeFile(x, "data/dat_x.ser") }
+
     timer{ val xx = readFile[Array[Matrix]](path) }
   }
   

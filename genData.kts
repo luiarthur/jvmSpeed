@@ -30,16 +30,28 @@ fun <T:Serializable>writeFile(x:T, dest:String) {
 val N = 50000
 val J = 32
 val M = 10
-val y = timer {
+val y: Array<Array<DoubleArray>> = timer {
   Array(M, {
     Array(N, {
-      Array(J, {runif()})
+      //Array(J, {runif()}) // this has higher storage cost
+      val tmp = DoubleArray(J)
+      tmp.indices.forEach{j -> tmp[j] = runif()}
+      tmp
     })
   })
 }
 
 println("writing")
-writeFile(y, "data/dat_kotlin.ser")
+timer{
+  writeFile(y, "data/dat_kotlin.ser")
+}
+
+//val x = Array(N, {runif()})
+//val x = DoubleArray(N)
+//x.indices.forEach{ i -> x[i] = runif() }
+//timer{
+//  writeFile(x, "data/dat_kotlin_x.ser")
+//}
 
 // to run as script: 
 // kotlinc -script genData.kts
