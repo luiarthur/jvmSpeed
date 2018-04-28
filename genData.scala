@@ -3,13 +3,14 @@ import java.io._
 
 object GenData {
   type Matrix = Array[Array[Double]]
+  //type Matrix = Array[Array[Short]]
   val path = "data/dat.ser"
 
   def timer[R](block: => R) = {
     val t0 = System.nanoTime()
     val result = block
     val t1 = System.nanoTime()
-    println("Elapsed time: " + (t1 - t0) / 1E9 + "s")
+    println(s"Elapsed time: ${(t1 - t0) / 1E9}s")
     result
   }
 
@@ -41,17 +42,18 @@ object GenData {
     //val N = args.head.toInt
     val N = 50000
     val J = 32
-    val M = 10
+    val I = 10
 
     //val N = 20000
     //val J = 200
-    //val M = 3
+    //val I = 3
 
     val z = timer {
-      Array.tabulate(M){m => 
+      Array.tabulate(I){i => 
         Array.tabulate(N){n => 
           Array.tabulate(J)(j => {
-            scala.util.Random.nextDouble
+            scala.util.Random.nextInt(20).toDouble
+            //scala.util.Random.nextInt(20).toShort
           })
         }
       }
